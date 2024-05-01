@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Degree to Grade Converter</title>
+    <!-- UIkit CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/css/uikit.min.css" />
+
+<!-- UIkit JS -->
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.20.7/dist/js/uikit-icons.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .grade {
+            font-size: 24px;
+            font-weight: bold;
+            -webkit-text-stroke: 0.5px black 
+            ;
+        }
+        .grade-a\+ {
+            color: goldenrod;
+        }
+        .grade-a {
+            color: green;
+        }
+        .grade-b {
+            color: yellowgreen;
+        }
+        .grade-c {
+            color: yellow;
+        }
+        .grade-d {
+            color: orange;
+        }
+        .grade-f {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form onsubmit="event.preventDefault();">
+            <h1>Degree to Grade Converter</h1>
+            <label for="degree">Enter Degree:</label>
+            <div class="uk-margin">
+                <input class="uk-input uk-form-width-medium" type="number"  placeholder="Enter degree" id="degree" min="0" max="100">
+            </div>
+            <button class="uk-button uk-button-default" onclick="convertDegreeToGrade()">Convert</button>
+            <p class="" id="result"></p>
+        </form>
+    </div>
+
+    <script>
+        function convertDegreeToGrade() {
+            const resultElement = document.getElementById('result');
+            const degree = parseFloat(document.getElementById('degree').value);
+            let grade = '';
+            let showerror = '';
+
+            if (degree >= 100 || degree < 0 ) {
+                showerror = 'please add a valid number between 100 and 0';
+            } else if (degree >= 90) {
+                grade = 'A+';
+            } else if (degree >= 80) {
+                grade = 'A';
+            } else if (degree >= 70) {
+                grade = 'B';
+            } else if (degree >= 60) {
+                grade = 'C';
+            } else if (degree >= 50) {
+                grade = 'D';
+            } else {
+                grade = 'F';
+            }
+
+           if(grade != '' ) resultElement.textContent = `Grade: ${grade}`;
+           else resultElement.textContent = `${showerror}`;
+           
+            resultElement.className = '';
+            resultElement.classList.add(`grade`,`grade-${grade.toLowerCase()}`);
+            
+        }
+    </script>
+</body>
+</html>
